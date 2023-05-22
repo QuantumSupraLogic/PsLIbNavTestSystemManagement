@@ -1,0 +1,30 @@
+{
+    "TransferBackupLocation": "",
+    "DestinationBackupLocation": "",
+    "DestinationSystem": [
+        {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": ""
+        },
+        {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": ""
+        }
+     ],
+    "SourceSystem": [
+         {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": ""
+        }
+    ]
+}
+    

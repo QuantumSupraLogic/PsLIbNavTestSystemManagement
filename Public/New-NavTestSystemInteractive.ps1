@@ -1,5 +1,5 @@
 Import-Module PsLibConfigurationManager
-$config = Get-Configuration -configurationFile '.\New-NavTestSystem\config\New-NavTestSystem_config.json'
+$config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config_BHD.json"
 
 Write-Host "Bitte waehlen Sie das System, das neu aufgebaut werden soll:"
 $i = 0

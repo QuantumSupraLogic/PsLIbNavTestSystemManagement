@@ -4,14 +4,24 @@ param (
     [bool] $backupDestinationDatabase,
     [bool] $createQueriesOnly
 )
-Import-Module PsLibSqlQueries
-Import-Module PsLibSqlTools
-Import-Module PsLibConfigurationManager
-Import-Module PsLibPowerShellTools
-Import-Module PsLibNavTools
+if (!Get-Module PsLibSqlQueries) {
+    Import-Module PsLibSqlQueries
+}
+if (!Get-Module PsLibSqlTools) {
+    Import-Module PsLibSqlTools
+}
+if (!Get-Module PsLibConfigurationManager) {
+    Import-Module PsLibConfigurationManager
+}
+if (!Get-Module PsLibPowerShellTools) {
+    Import-Module PsLibPowerShellTools
+}
+if (!Get-Module PsLibNavTools) {
+    Import-Module PsLibNavTools
+}
 
 function Main {
-    $config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config_BHD.json"
+    $config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config.json"
 
     $tempFolder = New-TemporaryDirectory 
     $execute = -not $createQueriesOnly
@@ -30,7 +40,9 @@ function Main {
 
     New-BackupDatabaseSqlQuery -srcDatabaseName $srcSystem[0].DatabaseName -backupLocation $backupLocation -withCompression | Out-File "$tempFolder\01-BackupSourceDatabase.sql" 
 
-    New-RestoreDatabaseSqlWithOverwriteQuery -dstDataSource $dstSystem.DataSource -dstDatabaseName $dstSystem.DatabaseName -backupLocation $backupLocation | Out-File "$tempFolder\02-RestoreIntoDestinationDatabase.sql" 
+    $dataPathNewDb = Get-DatabaseDataPath -dataSource $dstSystem.DataSource -databaseName $dstSystem.DatabaseName
+    $logPathNewDb = Get-DatabaseLogPath -dataSource $dstSystem.DataSource -databaseName $dstSystem.DatabaseName
+    New-RestoreDatabaseSqlWithOverwriteQuery -dstDataSource $dstSystem.DataSource -dstDatabaseName $dstSystem.DatabaseName -backupLocation $backupLocation -dataPathNewDb $dataPathNewDb -logPathNewDb $logPathNewDb | Out-File "$tempFolder\02-RestoreIntoDestinationDatabase.sql" 
 
     New-ChangeDatabaseRecoveryModelSqlQuery -databaseName $dstSystem.DatabaseName -recoveryModel 'SIMPLE' | Out-File "$tempFolder\03-PostProcessing.sql" 
     New-UseDatabaseQuery -databaseName $dstSystem.DatabaseName | Add-Content -Path "$tempFolder\03-PostProcessing.sql" 

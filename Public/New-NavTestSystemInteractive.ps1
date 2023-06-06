@@ -1,15 +1,17 @@
-Import-Module PsLibConfigurationManager
-$config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config_BHD.json"
+if (!Get-Module PsLibConfigurationManager) {
+    Import-Module PsLibConfigurationManager
+}
+$config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config.json"
 
-Write-Host "Bitte waehlen Sie das System, das neu aufgebaut werden soll:"
+Write-Host 'Bitte waehlen Sie das System, das neu aufgebaut werden soll:'
 $i = 0
 foreach ($DestinationSystem in $config.DestinationSystem) {
     $i += 1
-    Write-Host $i ": " $DestinationSystem.DisplayName
+    Write-Host $i ': ' $DestinationSystem.DisplayName
 }
-Write-Host "Strg-C : Abbruch"
+Write-Host 'Strg-C : Abbruch'
 
-$choice = Read-Host "> "
+$choice = Read-Host '> '
 
 if ($choice -notin 1..$i) {
     throw "Ungueltige Auswahl: $choice. Abbruch."
@@ -17,8 +19,8 @@ if ($choice -notin 1..$i) {
 
 $createQueriesOnly
 
-Write-Host "Moechten Sie die Aenderungen [d]urchfuehren oder SQL-Scripts [e]rstellen?"
-$choice2 = Read-Host "> " 
+Write-Host 'Moechten Sie die Aenderungen [d]urchfuehren oder SQL-Scripts [e]rstellen?'
+$choice2 = Read-Host '> ' 
 switch ($choice2.ToLower()) {
     'd' {
         $createQueriesOnly = $false
@@ -33,8 +35,8 @@ switch ($choice2.ToLower()) {
 
 $backupDestinationDatabase
 
-Write-Host "Soll ein Backup der Zieldatenbank durchgefuehrt werden (j/n)?"
-$choice2 = Read-Host "> " 
+Write-Host 'Soll ein Backup der Zieldatenbank durchgefuehrt werden (j/n)?'
+$choice2 = Read-Host '> ' 
 switch ($choice2.ToLower()) {
     'j' {
         $backupDestinationDatabase = $true
@@ -51,10 +53,10 @@ $dstSystem = $config.DestinationSystem[$choice - 1]
 $srcSystem = @($config.SourceSystem | Where-Object Architecture -EQ $dstSystem.Architecture)
 
 if ($srcSystem.Length -gt 1) {
-    throw "Es wurde mehr als eine Herkunftsdatenbank gefunden. Derzeit wird pro Architektur nur eine Datenbank unterstuetzt."
+    throw 'Es wurde mehr als eine Herkunftsdatenbank gefunden. Derzeit wird pro Architektur nur eine Datenbank unterstuetzt.'
 }
 
-if ($dstSystem.Architecture -notin "NAV09", "NAV2017") {
+if ($dstSystem.Architecture -notin 'NAV09', 'NAV2017') {
     throw "Nicht unterstuetzte Architektur gefunden: $dstSystem.Architecture. Unterstuetzte Architekturen: NAV09, NAV2017."
 }
 

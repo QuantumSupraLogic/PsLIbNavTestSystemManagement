@@ -1,4 +1,4 @@
-if (!Get-Module PsLibConfigurationManager) {
+if (-not (Get-Module PsLibConfigurationManager)) {
     Import-Module PsLibConfigurationManager
 }
 $config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config.json"

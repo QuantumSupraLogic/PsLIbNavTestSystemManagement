@@ -1,0 +1,115 @@
+{
+    "TransferBackupLocation": "",
+    "DestinationBackupLocation": "",
+    "DestinationSystem": [
+        {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": "",
+            "PostProcessing": [
+                {
+                    "RecoveryModel": "Simple",
+                    "ShrinkDatabase": true,
+                    "AlterUser": [
+                        {
+                            "User": "",
+                            "Login": ""
+                        },
+                        {
+                            "User": "",
+                            "Login": ""
+                        }
+                    ],
+                    "DropUser": [
+                        {
+                            "User": ""
+                        },
+                        {
+                            "User": ""
+                        }
+                    ],
+                    "CreateUser": [
+                        {
+                            "User": ""
+                        },
+                        {
+                            "User": ""
+                        }
+                    ],
+                    "AlterRole": [
+                        {
+                            "Role": "",
+                            "AddMember": ""
+                        },
+                        {
+                            "Role": "",
+                            "AddMember": ""
+                        }
+                    ],
+                    "ExecuteNavCodeunit": 50000
+                }
+            ]
+        },
+        {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": "",
+            "PostProcessing": [
+                {
+                    "RecoveryModel": "Simple",
+                    "ShrinkDatabase": true,
+                    "AlterUser": [
+                        {
+                            "User": "",
+                            "Login": ""
+                        },
+                        {
+                            "User": "",
+                            "Login": ""
+                        }
+                    ],
+                    "DropUser": [
+                        {
+                            "User": ""
+                        },
+                        {
+                            "User": ""
+                        }
+                    ],
+                    "CreateUser": [
+                        {
+                            "User": ""
+                        },
+                        {
+                            "User": ""
+                        }
+                    ],
+                    "AlterRole": [
+                        {
+                            "Role": "",
+                            "AddMember": ""
+                        },
+                        {
+                            "Role": "",
+                            "AddMember": ""
+                        }
+                    ],
+                    "ExecuteNavCodeunit": 50000
+                }
+            ]
+        }
+    ],
+    "SourceSystem": [
+        {
+            "Name": "",
+            "DisplayName": "",
+            "Architecture": "",
+            "DataSource": "",
+            "DatabaseName": ""
+        }
+    ]
+}

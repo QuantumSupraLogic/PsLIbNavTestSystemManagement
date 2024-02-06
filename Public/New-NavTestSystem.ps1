@@ -20,6 +20,8 @@ if (!Get-Module PsLibNavTools) {
     Import-Module PsLibNavTools
 }
 
+Set-StrictMode -Version 3.0
+
 function Main {
     $config = Get-Configuration -configurationFile "$PSScriptRoot\config\New-NavTestSystem_config.json"
 

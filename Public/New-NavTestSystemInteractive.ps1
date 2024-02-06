@@ -1,3 +1,5 @@
+Set-StrictMode -Version 3.0
+
 if (-not (Get-Module PsLibConfigurationManager)) {
     Import-Module PsLibConfigurationManager
 }
